@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "poppins", sans-serif;
 }
 
 body {
@@ -11,7 +12,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    font-family: "poppins", sans-serif;
+    overflow: hidden;
 }
 
 .principal {
@@ -25,7 +26,7 @@ nav {
     flex-direction: row;
     align-items: center;
     color: #fff;
-    padding: 20px 60px;
+    padding: 20px 70px;
 }
 
 nav img {
@@ -35,8 +36,9 @@ nav img {
 nav a {
     text-decoration: none;
     color: #fff;
-    font-size: 20px;
-    padding: 0 0 0 13vh;
+    font-size: 20px; 
+    margin: 50px;
+    transition: .6s;
 }
 
 h1 {
@@ -44,3 +46,102 @@ h1 {
     font-size: 20px;
 }
 
+.active{
+    border-radius: 10px;
+    background-color: #fff;
+    color: #D41224;
+    padding: 7px 10px;
+    font-weight: 500;
+}
+
+
+.login-button:hover {
+    border-radius: 10px;
+    background-color: #fff;
+    color: #D41224;
+    padding: 7px 20px 7px 20px;
+}
+
+
+.navbar-section {
+    padding: 0 0 0 70px;
+}
+
+
+
+
+.content {
+    display: flex;
+    width: 34%;
+    height: 70%;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 20px 0 0 5%;
+}
+
+h2 {
+    color: #fff;
+    font-size: 50px;
+    font-weight: 400;
+    padding: 50px 0 0 0;
+}
+
+.data-content {
+    display: flex;
+    width: 100%;
+
+}
+
+form input{
+    
+    float: left;
+    width: 100%;
+    padding: 20px 3vw 20px 20px;
+    background-color: #B53636;
+    border-radius: 15px;
+    border: 2px solid #fff;
+    font-size: 15px;
+    color: #fff;
+}
+
+form input::placeholder {
+    font-weight: 500;
+    color: #fff;
+    font-family: "poppins", sans-serif;
+    font-size: 15px;
+}
+
+form input::-webkit-outer-spin-button,
+form input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+
+}
+
+form {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.item5 {
+    grid-column: 1 / span 2;
+}
+
+.content button {
+    padding: 10px 40px;
+    color:#B53636;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    
+}
+
+footer {
+    display: flex;
+    flex-direction: row-reverse;
+}
+footer img {
+    width: 10vw;
+    margin: 0 30px;
+}
