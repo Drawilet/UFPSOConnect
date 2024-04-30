@@ -1,3 +1,24 @@
+<?php 
+require 'config.php';
+session_start();
+if (!isset($_SESSION['email'])) {
+    header("Location: login.php"); // Redirige al login si no hay sesión iniciada
+    exit;
+}
+
+
+// Obtiene el nombre del usuario desde la base de datos
+$email = $_SESSION['email'];
+$stmt = $conn->prepare("SELECT name FROM register WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$stmt->bind_result($name);
+$stmt->fetch();
+$stmt->close();
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +31,7 @@
     <meta name="description" content="Portal para acceder a la red social de la UFPSO">
     <link rel="author" href="">
     <link rel="icon" href="Img/logo-vertical-blanco-connect.png" type="image/png">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="../css/styless.css">
     <title>UFPSOConnect - Register</title>
 </head>
 <body>
@@ -23,41 +44,22 @@
                <h1>CONNECT</h1>
                
                <div class="navbar-section">
-                   <a href="login" class="login-button">Login</a>
-                   <a href="#" class="register-button active">Register</a>
+                   <a href="login.php" class="login-button">Login</a>
+                   <a href="register.php" class="register-button active">Register</a>
                </div>
-               <form action="/logout?method=DELETE" method="POST">
+               <a href="logout.php" class="register-button active">Logout</a>
+               <!-- <form action="" method="post">
 
-                   <button type="submit" class="register-button active">Logout</button>
-                </form>
+                   <button type="submit" name="submit" class="register-button active">Logout</button>
+                </form> -->
             </nav>
 
             <div class="content">
-                <h2>Hello <%= name %></h2>
+                <h2>Bienvenido, <?php echo $name; ?>!</h2>
                 <p>If you already have an account, enter your email and institutional code to log in.</p>
                 <div class="data-content">
                     <!-- FORM CONTENT   z -->
-                    <form action="#">
-                        <div class="form-group">
-                            <input type="text" name="nameInput" class="item1" placeholder="First name:">
-                            <label for="" class="form-label">First Name</label>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="lastNameInput" class="item2" placeholder="Last name:">
-                            <label for="" class="form-label">Last Name</label>
-
-                        </div>
-                        <div class="form-group2">
-
-                            <input type="number" name="codeInput" class="item3" placeholder="Code:">
-                        </div>
-                        <div class="form-group2">
-                            <input type="password" name="passwordInput" class="item4" placeholder="Password:">
-
-                        </div>
-
-                            <input type="email" name="emailInput" class="item5" placeholder="Institutional Email:">
-                    </form>
+                    
 
                 </div>
                 <button> Create Account</button>
