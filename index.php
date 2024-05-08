@@ -1,8 +1,8 @@
 <?php 
-require 'config.php';
+require 'php/config.php';
 session_start();
 if (!isset($_SESSION['email'])) {
-    header("Location: login.php"); // Redirige al login si no hay sesión iniciada
+    header("Location: php/login.php"); // Redirige al login si no hay sesión iniciada
     exit;
 }
 
@@ -31,7 +31,7 @@ $stmt->close();
     <meta name="description" content="Portal para acceder a la red social de la UFPSO">
     <link rel="author" href="">
     <link rel="icon" href="Img/logo-vertical-blanco-connect.png" type="image/png">
-    <link rel="stylesheet" href="../css/styless.css">
+    <link rel="stylesheet" href="css/styles.css">
     <title>UFPSOConnect - Register</title>
 </head>
 <body>
@@ -47,7 +47,7 @@ $stmt->close();
                    <a href="login.php" class="login-button">Login</a>
                    <a href="register.php" class="register-button active">Register</a>
                </div>
-               <a href="logout.php" class="register-button active">Logout</a>
+               <a href="php/logout.php" class="register-button active">Logout</a>
                <!-- <form action="" method="post">
 
                    <button type="submit" name="submit" class="register-button active">Logout</button>

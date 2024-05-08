@@ -2,9 +2,9 @@
 require 'config.php';
 session_start();
 
-// Redirect if already logged in
+// Redirecciona si ya se logueó
 if (isset($_SESSION['email'])) {
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit;
 }
 
@@ -13,7 +13,7 @@ if (isset($_POST['signIn'])) {
     $password = $_POST['password'];
     $code = $_POST['code'];
     
-    // Use prepared statements to prevent SQL Injection
+    // Utilice declaraciones preparadas para evitar la inyección SQL
     $stmt = $conn->prepare("SELECT email, password FROM register WHERE email = ? AND code = ?");
     $stmt->bind_param("ss", $email, $code);
     $stmt->execute();
@@ -22,22 +22,29 @@ if (isset($_POST['signIn'])) {
     if ($result->num_rows === 1) {
         $row = $result->fetch_assoc();
         
-        // Verify password against hashed password in database
+        // Verificar la contraseña con la contraseña hash en la base de datos
         if (password_verify($password, $row['password'])) {
             $_SESSION['email'] = $row['email'];
-            header("Location: index.php");
+            header("Location: ../index.php");
             exit;
         } else {
-            echo "Incorrect Email or Password";
+            $error_message = "Credenciales incorrectas.";
         }
     } else {
-        echo "User not found or code mismatch";
+        $error_message = "Credenciales incorrectas.";
     }
 
+    // Cerrar la conexión y liberar recursos
     $stmt->close();
+    $conn->close();
 }
-$conn->close();
+
+// Mostrar el mensaje de error si existe
+if (isset($error_message)) {
+    echo "<div class='error-message'>$error_message</div>";
+}
 ?>
+
     
 
 
@@ -47,7 +54,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../img/logo-vertical-blanco-connect.png" type="image/png">
-    <link rel="stylesheet" href="../css/styless.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <title>UFPSOConnect - Register</title>
 </head>
 <body>  
@@ -59,7 +66,7 @@ $conn->close();
                <img src="../Img/logo-alone.png" alt="UFPSO Icon">
                <h1>CONNECT</h1>
                <div class="navbar-section">
-                   <a href="/" class="login-button active">Login</a>
+                   <a href="login.php" class="login-button active">Login</a>
                    <a href="register.php" class="register-button">Register</a>
                </div>
             </nav>
@@ -91,7 +98,7 @@ $conn->close();
                             </div>
                             
                         </div>
-                        <button type="submit" value="Sign In" name="signIn"> Login to account</button>
+                        <button type="submit" value="Sign In" name="signIn" class="button"> Login to account</button>
                     </form>
 
                 </div>
