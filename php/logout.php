@@ -1,14 +1,14 @@
 <?php
 require 'config.php';
-session_start(); // Start the session before manipulating it
+session_start(); // START THE SESSION BEFORE MANIPULATING IT 
 
-// Clear all session variables
+// CLEAN ALL SESSION VARIABLES
 $_SESSION = [];
 
-// Destroy the session data on the server
+// DESTROY THE SESSION DATA ON THE SERVER
 session_destroy();
 
-// Optionally, you can clear the session cookie
+// CLEAR THE SESSION COOKIES
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(session_name(), '', time() - 42000,
@@ -17,6 +17,6 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-// Redirect to the login page
+// REDIRECT TO THE LOGIN PAGE
 header('Location: login.php');
-exit; // It's good practice to call exit after a header redirect to make sure the script stops executing.
+exit;

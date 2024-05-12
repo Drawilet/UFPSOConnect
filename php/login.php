@@ -2,49 +2,72 @@
 require 'config.php';
 session_start();
 
-// Redirecciona si ya se logueó
+// REDIRECTION IF IS ALREADY LOGGED
 if (isset($_SESSION['email'])) {
-    header("Location: ../index.php");
-    exit;
+    // VALIDATE IF THE USER HAS COMPLETE PROFILE OR NOT
+    $stmt = $conn->prepare("SELECT profile_complete FROM register WHERE email = ?");
+    $stmt->bind_param("s", $_SESSION['email']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        if ($row['profile_complete'] == 1) {
+            header("Location: ../index.php");
+            exit;
+        } else {
+            header("Location: config-user.php");
+            exit;
+        }
+    }
 }
 
+$error_message = '';  
+
+
+// CHECK IF THE SIGN-IN FORM WAS SUBMITTED
 if (isset($_POST['signIn'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
     $code = $_POST['code'];
-    
-    // Utilice declaraciones preparadas para evitar la inyección SQL
-    $stmt = $conn->prepare("SELECT email, password FROM register WHERE email = ? AND code = ?");
+
+    // RETRIEVE USER DATA BASED ON EMAIL AND CODE
+    $stmt = $conn->prepare("SELECT email, password, profile_complete FROM register WHERE email = ? AND code = ?");
     $stmt->bind_param("ss", $email, $code);
     $stmt->execute();
     $result = $stmt->get_result();
     
-    if ($result->num_rows === 1) {
+    // IF THE QUERY WAS SUCCESSFUL AND RETURNED EXACTLY ONE ROW
+    if ($result && $result->num_rows === 1) {
         $row = $result->fetch_assoc();
         
-        // Verificar la contraseña con la contraseña hash en la base de datos
+        // VERIFY THE PASSWORD AGAINST THE HASHED PASSWORD
         if (password_verify($password, $row['password'])) {
             $_SESSION['email'] = $row['email'];
-            header("Location: ../index.php");
+            
+            // REDIRECT BASED ON PROFILE COMPLETENESS
+            if ($row['profile_complete'] == 0) {
+                header("Location: config-user.php");
+            } else {
+                header("Location: ../index.php");
+            }
             exit;
         } else {
-            $error_message = "Credenciales incorrectas.";
+            $error_message = "Incorrect credentials.";
         }
     } else {
-        $error_message = "Credenciales incorrectas.";
+        $error_message = "Incorrect credentials.";
     }
 
-    // Cerrar la conexión y liberar recursos
+    // CLOSE DATABASE RESOURCES
     $stmt->close();
     $conn->close();
 }
 
-// Mostrar el mensaje de error si existe
-if (isset($error_message)) {
+// DISPLAY ERROR MESSAGE IF SET
+if (!empty($error_message)) {
     echo "<div class='error-message'>$error_message</div>";
 }
 ?>
-
     
 
 

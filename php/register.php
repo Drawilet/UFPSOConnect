@@ -15,19 +15,19 @@ if (isset($_POST["submit"])) {
     $password = $_POST["password"];
     $code = trim($_POST["code"]);
 
-    // Validación de campos obligatorios
+    // VALIDATE THE OBLIGATORY FIELDS
     if (empty($name) || empty($lastName) || empty($email) || empty($password) || empty($code)) {
         echo "<script>alert('All fields are required.'); window.location.href='register.php';</script>";
         exit;
     }
 
-    // Validar el formato del email
+    // VALIDATE THE EMAIL FORMAT
     if (!filter_var($email, FILTER_VALIDATE_EMAIL) || !str_ends_with($email, '@ufpso.edu.co')) {
         echo "<script> alert('Invalid email address. Please use your university email.'); window.location.href='register.php';</script>";
         exit;
     }
 
-    // Verificar si el código ya está registrado
+    // VALIDATE IF THE CODE IS REGISTERED
     $stmt = $conn->prepare("SELECT * FROM register WHERE code = ?");
     $stmt->bind_param("s", $code);
     $stmt->execute();
@@ -37,7 +37,7 @@ if (isset($_POST["submit"])) {
         exit;
     }
 
-    // Verificar si el correo electrónico ya está registrado
+    // VALIDATE OR VERIFICATE IF THE EMAIL IS REGISTERED
     $stmt = $conn->prepare("SELECT * FROM register WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -47,21 +47,21 @@ if (isset($_POST["submit"])) {
         exit;
     }
 
-    // Validar longitud de contraseña
+    // VALIDATE THE PASSWORD LENGTH
     if (strlen($password) < 6) {
         echo "<script>alert('Password must be at least 6 characters long.'); window.location.href='register.php';</script>";
         exit;
     }
 
     
-    // Hash de la contraseña
+    // PASSWORD HASH
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-    // Insertar nuevo usuario en la base de datos
+    // INSERT NEW USERS IN THE DATABASE
     $insert = $conn->prepare("INSERT INTO register (name, lastName, code, password, email) VALUES (?, ?, ?, ?, ?)");
     $insert->bind_param("sssss", $name, $lastName, $code, $passwordHash, $email);
     if ($insert->execute()) {
-        echo "<script>alert('Registration successful.'); window.location.href='login.php';</script>";
+        echo "<script>alert('Registration successful.'); window.location.href='config-user.php';</script>";
     } else {
         echo "<script>alert('Error in registration.'); window.location.href='register.php';</script>";
     }
@@ -70,6 +70,7 @@ if (isset($_POST["submit"])) {
     $insert->close();
     $conn->close();
 }
+
 
 ?>
 
