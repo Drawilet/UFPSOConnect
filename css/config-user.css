@@ -35,7 +35,6 @@ h2 {
     text-align: start;
 }
 
-
 .image-content {
     display: flex;
     flex-direction: row;
@@ -46,25 +45,60 @@ h2 {
 
 .image-content h3 {
     width: 100%;
-
 }
 
-
-.content button {
+.content .button {
     display: flex;
     margin: 0px;
     padding: 0 150px 10px 10px;
     border: 2px solid var(--principalColor);
-    line-height: 30px;
+    background-color: #fff;
+    border-radius: 20px;
+    text-align: center;
 }
+
 label {
     position: relative;
     margin: 0; 
     padding: 0 0 0 20px; 
+    text-align: center;
+}
+
+.file-select {
+    position: relative;
+    display: inline-block;
+}
+
+.file-select::before {
+    background-color: #fff;
+    color: var(--principalColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--principalColor);
+    content: 'SELECT';
+    position: absolute;
+    left: 0;
+    right: 20px;
+    top: 0;
+    bottom: 0;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+.file-select input[type="file"] {
+    opacity: 0;
+    width: 220px;
+    height: 40px;
+    display: inline-block;
 }
 
 input {
     padding: 10px 3vw 10px 20px;
+}
+
+.input-profile {
+    padding: 0px 3vw 0px 20px;
 }
 
 .principal-card-content {
@@ -79,7 +113,7 @@ input {
 .one {
     grid-column: 1 / 4;
     grid-row: 1;
-  }
+}
 
 .one h4 {
     color: #808080;
@@ -136,7 +170,6 @@ input {
     color: #fff;
     margin: auto;
 }
-
 
 .card-profile {
     margin-top: 40px;

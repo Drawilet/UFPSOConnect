@@ -2,12 +2,12 @@
 require 'php/config.php';
 session_start();
 if (!isset($_SESSION['email'])) {
-    header("Location: php/login.php"); // Redirige al login si no hay sesión iniciada
+    header("Location: php/login.php"); // IF THE SESSION ISN'T ALLOWED, REDIRECT
     exit;
 }
 
 
-// Obtiene el nombre del usuario desde la base de datos
+// GET THE USERNAME FROM THE DATABASE
 $email = $_SESSION['email'];
 $stmt = $conn->prepare("SELECT name FROM register WHERE email = ?");
 $stmt->bind_param("s", $email);
@@ -64,7 +64,7 @@ $stmt->close();
                 </div>
                 <button> Create Account</button>
             </div>
-            <!-- UFPSO image footer  -->
+            <!-- UFPSO IMAGE FOOTER  -->
             <footer>
                 <img src="Img/logo-vertical-blanco-connect-new.png" alt="">
             </footer>
