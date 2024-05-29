@@ -87,7 +87,7 @@ if (isset($_POST["submit"])) {
         content="UFPSOConnect, Red Social UFPSO, Blog, Universidad, Comunicacion, Frontend, Desarrollo web">
     <meta name="description" content="Portal para acceder a la red social de la UFPSO">
     <link rel="author" href="">
-    <link rel="icon" href="img/logo-vertical-blanco-connect.png" type="image/png">
+    <link rel="icon" href="../img/logo-vertical-blanco-connect.png" type="image/png">
     <link rel="stylesheet" href="../css/styles.css" type="text/css">
     <title>UFPSOConnect - Register</title>
 </head>
