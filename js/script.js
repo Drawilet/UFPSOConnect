@@ -24,6 +24,7 @@ function validateUsername() {
         return;
     }
     
+    
     // VALIDATE THE SPECIAL CHARACTERS
     if (!/^\w+$/.test(username)) {
         statusText.textContent = 'Username can only contain letters, numbers, and underscores';
@@ -113,3 +114,13 @@ $(document).ready(function() {
         });
     });
 });
+
+//Style of search button when is focus on the input
+
+function inputFocus() {
+    document.getElementById('fa-search').style.color="black";
+}
+
+function inputNoFocus() {
+    document.getElementById('fa-search').style.color="white";
+}
