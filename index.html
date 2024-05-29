@@ -1,0 +1,177 @@
+<!-- <?php 
+/*
+require 'php/config.php';
+session_start();
+if (!isset($_SESSION['email'])) {
+    header("Location: php/login.php"); // IF THE SESSION ISN'T ALLOWED, REDIRECT
+    exit;
+}
+
+
+// GET THE USERNAME FROM THE DATABASE
+$email = $_SESSION['email'];
+$stmt = $conn->prepare("SELECT name FROM register WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$stmt->bind_result($name);
+$stmt->fetch();
+#$stmt->close();
+*/
+?> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="title" content="UFPSO, Connect, Universidad Francisco de Paula Santander, Red   Social" />
+    <meta name="keywords"
+        content="UFPSOConnect, Red Social UFPSO, Blog, Universidad, Comunicacion, Frontend, Desarrollo web" />
+    <meta name="description" content="Portal para acceder a la red social de la UFPSO" />
+    <link rel="author" href="" />
+    <link rel="icon" href="Img/logo-vertical-blanco-connect.png" type="image/png" />
+    <link rel="stylesheet" href="css/landingpage.css" />
+    <title>UFPSOConnect - Home</title>
+</head>
+
+<body>
+    <section>
+        <div class="principal">
+            <nav>
+                <div class="nav card">
+                    <h1>Connect</h1>
+                    <div class="icons-section">
+                        <a href="#" class="active"><i class="fa-solid fa-house"></i>Home</a>
+                        <a href="#"><i class="fa-solid fa-user"></i>Friends</a>
+                        <a href="#"><i class="fa-solid fa-people-group"></i>Groups</a>
+                        <a href="#"><i class="fa-regular fa-calendar-check"></i>Events</a>
+                        <a href="#"><i class="fa-solid fa-store"></i>ConnectShop</a>
+                    </div>
+
+                    <div class="side-nav-section">
+                        <div class="search-box">
+                            <button onclick="inputFocus()" class="btn-search"><i onclick="inputFocus()"
+                                    class="fas fa-search" id="fa-search"></i></button>
+                            <input type="text" class="input-search" id="input-search" placeholder="Search for people"
+                                onfocus="inputFocus()" onblur="inputNoFocus()">
+                        </div>
+                        <div class="notifier new">
+                            <a href="#"><i class="bell fa fa-bell-o"></i></a>
+                            <span class="badge">10</span>
+                        </div>
+
+                        <div class="message-count">
+                            <a href="#"><i class="fa-solid fa-message"><span>4</span></i></a>
+                        </div>
+
+                        <div class="settings">
+                            <a href="#"><i class="fa-solid fa-gear"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="container">
+                <div class="aside">
+                    <div class="profile-card card">
+                        <div class="profile">
+                            <div class="profile-image">
+                                <img src="img/user.jpg" alt="" />
+                            </div>
+                            <div class="profile-names">
+                                <h3>Jeferson Mesa</h3>
+                                <h4>@Jefersonsmesa</h4>
+                            </div>
+                            <div class="profile-status">
+                                <p>Focusing on me 🎯</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="news-section card"></div>
+                </div>
+                <div class="mid-side">
+                    <div class="share-input card">
+                        <img src="img/user.jpg" alt="" />
+                        <input placeholder="Share something funny or interesting..." type="text" />
+                        <div class="icons">
+                            <a href="#"><i class="fa-solid fa-image"></i></a>
+                            <a href="#"><i class="fa-solid fa-video"></i></a>
+                            <a href="#"><i class="fa-solid fa-microphone"></i></a>
+                        </div>
+                    </div>
+                    <div class="history-feed card">
+                        <div class="title-flex">
+                            <h1>History Feed <i class="fa-regular fa-file-video"></i></h1>
+                            <p><span>14 </span>histories</p>
+                        </div>
+                        <div class="history-content">
+                            <div class="history-card new-history">
+                                <div class="img-history">
+                                    <a href="#"><i class="fa-solid fa-circle-plus"></i></a>
+                                    <h4>New Story</h4>
+                                </div>
+                            </div>
+                            <div class="history-card history-card1">
+                                <div></div>
+                                <div class="img-history">
+                                    <img src="img/user2.jpg" alt="">
+                                    <h4>@username</h4>
+                                </div>
+                                <div class="footer-history"><p>3 hours ago</p></div>
+                            </div>
+                            <div class="history-card history-card2">
+                                <div></div>
+                                <div class="img-history">
+                                    <img src="img/user3.jpg" alt="">
+                                    <h4>@username</h4>
+                                </div>
+                                <div class="footer-history"><p>4 hours ago</p></div>
+                            </div>
+                            <div class="history-card history-card3">
+                                <div></div>
+                                <div class="img-history">
+                                    <img src="img/user4.jpg" alt="">
+                                    <h4>@username</h4>
+                                </div>
+                                <div class="footer-history"><p>6 hours ago</p></div>
+                            </div>
+                            <div class="history-card history-card4">
+                                <div></div>
+                                <div class="img-history">
+                                    <img src="img/user5.jpg" alt="">
+                                    <h4>@username</h4>
+                                </div>
+                                <div class="footer-history"><p>8 hours ago</p></div>
+                            </div>
+                            <div class="history-card history-card5">
+                                <div></div>
+                                <div class="img-history">
+                                    <img src="img/user6.jpg" alt="">
+                                    <h4>@username</h4>
+                                </div>
+                                <div class="footer-history"><p>10 hours ago</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-section card"></div>
+                </div>
+
+                <div class="right-side">
+                    <div class="suggested-people">
+                        <div class="suggested-profile"></div>
+                    </div>
+
+                    <div class="connectShop-section"></div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script src="js/script.js"></script>
+    <script src="https://kit.fontawesome.com/2739a6b5b8.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
